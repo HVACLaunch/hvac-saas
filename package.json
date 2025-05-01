@@ -1,20 +1,53 @@
-{
-  "name": "hvac-saas",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "^15.3.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@supabase/supabase-js": "^2.0.0",
-    "typescript": "^5.1.6",
-    "@types/react": "^18.0.38",
-    "@types/react-dom": "^18.0.11",
-    "@types/node": "^18.17.0"
-  }
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+const unwantedDirs = [];
+const emptyDirs = [];
+const largeFiles = [];
+
+function walk(dir) {
+  let isEmpty = true;
+  fs.readdirSync(dir).forEach(name => {
+    const fullPath = path.join(dir, name);
+    const stat = fs.statSync(fullPath);
+
+    if (stat.isDirectory()) {
+      // skip obvious build / deps directories
+      if (['node_modules', '.next', '.git'].includes(name)) {
+        unwantedDirs.push(fullPath);
+        isEmpty = false;
+      } else {
+        const wasEmpty = walk(fullPath);
+        if (wasEmpty) {
+          emptyDirs.push(fullPath);
+        }
+        isEmpty = false;
+      }
+    } else {
+      isEmpty = false;
+      if (stat.size > 10 * 1024 * 1024) {
+        largeFiles.push({ path: fullPath, size: stat.size });
+      }
+    }
+  });
+  return isEmpty;
 }
+
+// Kick off scan from project root
+walk(process.cwd());
+
+// Report
+console.log('\n🗑️  Unwanted directories (you can safely delete these):');
+unwantedDirs.forEach(d => console.log('  •', d));
+
+console.log('\n📂 Empty directories:');
+emptyDirs.forEach(d => console.log('  •', d));
+
+console.log('\n🐘 Large files (>10 MB):');
+largeFiles.forEach(f => 
+  console.log(`  • ${f.path} — ${(f.size / 1024 / 1024).toFixed(1)} MB`)
+);
+
+console.log('\nDone.');
