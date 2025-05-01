@@ -1,7 +1,7 @@
 
 
 import React, { useState, useEffect, FormEvent } from 'react';
-import { supabase } from '../../services/supabaseClient';
+import { supabase } from '@/services/supabaseClient';
 import { useRouter } from 'next/router';
 
 interface InvoiceItem {

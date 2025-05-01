@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../../services/supabaseClient';
+import { supabase } from '@/services/supabaseClient';
 
 interface Job {
   id: number;

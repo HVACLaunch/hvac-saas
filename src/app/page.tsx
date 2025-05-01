@@ -1,8 +1,16 @@
-
-
 // src/app/page.tsx
-import React from 'react';
 import Link from 'next/link';
+
+const cardStyle: React.CSSProperties = {
+  display: 'block',
+  padding: '1rem',
+  borderRadius: '8px',
+  border: '1px solid #ddd',
+  textAlign: 'center',
+  textDecoration: 'none',
+  color: '#333',
+  fontWeight: 500,
+};
 
 export default function HomePage() {
   return (
@@ -14,31 +22,18 @@ export default function HomePage() {
 
       <section style={{ display: 'grid', gap: '1.5rem', maxWidth: '600px', margin: '0 auto' }}>
         <Link href="/booking">
-          <a style={cardStyle}>Booking Calendar</a>
+          <div style={cardStyle}>Booking Calendar</div>
         </Link>
         <Link href="/crm">
-          <a style={cardStyle}>Client & Job CRM</a>
+          <div style={cardStyle}>Client & Job CRM</div>
         </Link>
         <Link href="/invoices">
-          <a style={cardStyle}>Invoices & Quotes</a>
+          <div style={cardStyle}>Invoices & Quotes</div>
         </Link>
         <Link href="/payments">
-          <a style={cardStyle}>Payments</a>
+          <div style={cardStyle}>Payments</div>
         </Link>
       </section>
     </main>
   );
-
-  function cardStyle() {
-    return {
-      display: 'block',
-      padding: '1rem',
-      borderRadius: '8px',
-      border: '1px solid #ddd',
-      textAlign: 'center',
-      textDecoration: 'none',
-      color: '#333',
-      fontWeight: 500,
-    };
-  }
 }

@@ -1,7 +1,6 @@
 
-
-import { useState } from 'react'
-import { supabase } from '../../services/supabaseClient'
+import React, { useState } from 'react'
+import { supabase } from '@/services/supabaseClient'
 
 interface PaymentFormProps {
   clientId: string

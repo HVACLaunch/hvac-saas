@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function Header() {
+export default function Footer() {
   return (
-    <header style={{ padding: '1rem', borderBottom: '1px solid #eaeaea', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <footer style={{ padding: '1rem', borderBottom: '1px solid #eaeaea', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
         <Link href="/">
           HVAC SaaS
@@ -15,6 +15,6 @@ export default function Header() {
         <Link href="/invoices" style={{ marginRight: '1rem' }}>Invoices</Link>
         <Link href="/payments">Payments</Link>
       </nav>
-    </header>
+    </footer>
   );
 }
