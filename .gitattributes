@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Ensure native modules are treated as binary
+*.node binary

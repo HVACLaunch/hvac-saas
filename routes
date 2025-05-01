@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+/**
+ * Main routing configuration for HVAC SaaS.
+ */
+
+const express = require('express');
+const router = express.Router();
+
+// Health check endpoint
+router.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+// Root endpoint
+router.get('/', (req, res) => {
+  res.send('Welcome to HVAC SaaS API');
+});
+
+// TODO: Import and mount resource-specific routers
+// e.g. router.use('/users', require('./routes/users'));
+
+module.exports = router;
